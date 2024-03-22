@@ -9,9 +9,12 @@ namespace Sameple
     public class Weapon
     {
         public string Name { get; private set; }
+        public int BaseAtk {  get; private set; }
         public int AtkBonus {  get; set; }
         public int DefBonus { get; private set; }
         public int SpdBonus { get; private set; }
+        public int EnhancementLevel {  get; private set; }
+        public int EnhancementCost {  get; private set; }
 
         public Weapon(string name, int atkBonus, int defBonus, int spdBonus)
         {
@@ -19,6 +22,9 @@ namespace Sameple
             AtkBonus = atkBonus;
             DefBonus = defBonus;
             SpdBonus = spdBonus;
+            EnhancementLevel = 0;
+            EnhancementCost = 100;
+            
         }
     }
 

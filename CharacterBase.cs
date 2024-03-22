@@ -79,6 +79,7 @@ namespace Sameple
         public List<Weapon> Weapons {  get; private set; }
         public DungeonType CurrentDungeonType { get; set; }
 
+        private double baseEnhancementSuccessRate = 1.0;
         private int weaponAtkBonus;
         private int weaponDefBonus;
         private int weaponSpdBonus;
@@ -189,6 +190,18 @@ namespace Sameple
             {
                 Console.WriteLine("강화에 필요한 골드가 부족합니다.");
             }
+        }
+
+        private double CalculateEnhancementSuccessProbability(int enhancementLevel)
+        {
+            return baseEnhancementSuccessRate - (enhancementLevel - 1) * 0.1;
+        }
+
+        private bool IsEnhancementSuccess(double successProbability)
+        {
+            double randomValue = new Random().NextDouble();
+
+            return randomValue < successProbability;
         }
 
         public void Victory(int expGained, int minGold, int maxGold)

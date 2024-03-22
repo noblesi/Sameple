@@ -163,7 +163,7 @@ namespace Sameple
         {
             double expMultiplier = 1.0;
 
-            switch (dungeon)
+            switch (dungeonType)
             {
                 case DungeonType.Forest:
                     expMultiplier = 1.2;
@@ -185,7 +185,7 @@ namespace Sameple
         {
             double goldMultiplier = 1.0;
 
-            switch (dungeon)
+            switch (dungeonType)
             {
                 case DungeonType.Forest:
                     goldMultiplier = 1.0;
