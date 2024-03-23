@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sameple
+﻿namespace Sameple
 {
     public class Map
     {
         private const char BorderSymbol = '■';
-        private const char EmptySymbol = ' ';
+        private const char EmptySymbol = '　';
 
         private char[,] map;
         private int width;
@@ -42,15 +35,23 @@ namespace Sameple
             }
         }
 
-        public void Display()
+        public void Display(int playerX, int playerY)
         {
-            // 맵 표시
             Console.Clear();
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
-                    Console.Write(map[x, y]);
+                    if (x == playerX && y == playerY)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green; // 플레이어 색상 설정
+                        Console.Write('●'); // 플레이어
+                        Console.ResetColor(); // 색상 초기화
+                    }
+                    else
+                    {
+                        Console.Write(map[x, y]);
+                    }
                 }
                 Console.WriteLine();
             }
