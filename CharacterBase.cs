@@ -33,9 +33,10 @@ namespace Sameple
 
         public virtual void Attack(CharacterBase target)
         {
-            int damage = Math.Max(this.Atk - target.Def, 0);
-            Console.WriteLine($"{this.Name}이(가) {target.Name}을(를) 공격하여 {damage}의 데미지를 입혔습니다.");
-            target.TakeDamage(damage);                
+            int damage = Math.Max(Atk - target.Def, 0);
+            Console.WriteLine($"{Name}이(가) {target.Name}을(를) 공격하여 {damage}의 데미지를 입혔습니다.");
+            target.TakeDamage(damage);
+            Thread.Sleep(1000);
         }
 
         public virtual void TakeDamage(int damage)
@@ -95,16 +96,16 @@ namespace Sameple
             Inventory = new Inventory(new Dictionary<int, Item>());
         }
 
-        public void GainExp(int exp)
+        public void GainExp(int exp, int lastLog)
         {
             Exp += exp;
             if(Exp >= MaxExp)
             {
-                LevelUp();
+                LevelUp(lastLog);
             }
         }
 
-        private void LevelUp()
+        private void LevelUp(int lastLog)
         {
             Level++;
             Exp = 0;
@@ -115,14 +116,16 @@ namespace Sameple
             Def += rand.Next(1, 4);
             Spd += rand.Next(1, 4);
 
+            Console.SetCursorPosition(1, GameManager.MapHeight + 1 + lastLog);
             Console.WriteLine("Level Up!");
         }
 
-        public void GainGold(int minGold, int maxGold)
+        public void GainGold(int minGold, int maxGold, int lastLog)
         {
             Random rand = new Random();
             int gainedGold = rand.Next(minGold, maxGold + 1);
             Gold += gainedGold;
+            Console.SetCursorPosition(1, GameManager.MapHeight + 2 + lastLog);
             Console.WriteLine($"{gainedGold}골드를 획득했습니다.");
         }
 
@@ -162,8 +165,6 @@ namespace Sameple
             weaponAtkBonus = weapon.AtkBonus;
             weaponDefBonus = weapon.DefBonus;
             weaponSpdBonus = weapon.SpdBonus;
-
-            Console.WriteLine($"{weapon.Name}을(를) 장착하였습니다.");
         }
 
         public void EnhanceWeapon(Weapon weapon, int enhancementLevel)
@@ -204,10 +205,10 @@ namespace Sameple
             return randomValue < successProbability;
         }
 
-        public void Victory(int expGained, int minGold, int maxGold)
+        public void Victory(int expGained, int minGold, int maxGold, int lastLog)
         {
-            GainExp(expGained);
-            GainGold(minGold, maxGold);
+            GainExp(expGained, lastLog);
+            GainGold(minGold, maxGold, lastLog);
         }
 
         public void Defeat()

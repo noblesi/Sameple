@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Sameple
 {
-    public class Weapon
+    public class Weapon : Item
     {
-        public string Name { get; private set; }
         public int BaseAtk {  get; private set; }
         public int AtkBonus {  get; set; }
         public int DefBonus { get; private set; }
@@ -16,22 +15,21 @@ namespace Sameple
         public int EnhancementLevel {  get; private set; }
         public int EnhancementCost {  get; private set; }
 
-        public Weapon(string name, int atkBonus, int defBonus, int spdBonus)
+        public Weapon(int id, string name, int value, string description, string type, int atkBonus, int defBonus, int spdBonus)
+            : base(id, name, value, description, type)
         {
-            Name = name;
             AtkBonus = atkBonus;
             DefBonus = defBonus;
             SpdBonus = spdBonus;
             EnhancementLevel = 0;
             EnhancementCost = 100;
-            
         }
     }
 
     public class Sword : Weapon
     {
-        public Sword(string name, int atkBonus, int defBonus, int spdBonus)
-            : base(name, atkBonus, defBonus, spdBonus)
+        public Sword(int id, string name, int value, string description, string type, int atkBonus, int defBonus, int spdBonus)
+            : base(id, name, value, description, type, atkBonus, defBonus, spdBonus)
         {
 
         }
@@ -39,8 +37,8 @@ namespace Sameple
 
     public class Spear : Weapon
     {
-        public Spear(string name, int atkBonus, int defBonus, int spdBonus)
-            : base(name, atkBonus, defBonus, spdBonus)
+        public Spear(int id, string name, int value, string description, string type, int atkBonus, int defBonus, int spdBonus)
+            : base(id, name, value, description, type, atkBonus, defBonus, spdBonus)
         {
 
         }
@@ -48,8 +46,8 @@ namespace Sameple
 
     public class Axe : Weapon
     {
-        public Axe(string name, int atkBonus, int defBonus, int spdBonus)
-            : base(name, atkBonus, defBonus, spdBonus)
+        public Axe(int id, string name, int value, string description, string type, int atkBonus, int defBonus, int spdBonus)
+            : base(id, name, value, description, type, atkBonus, defBonus, spdBonus)
         {
 
         }

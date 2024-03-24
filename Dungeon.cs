@@ -38,17 +38,21 @@ namespace Sameple
 
         public void EnterDungeon(Player player)
         {
-            Console.WriteLine("던전에 입장합니다.");
+            GameManager.DisplayPlayerInfo();
+
+            Thread.Sleep(2000);
 
             DungeonType dungeonType = player.CurrentDungeonType;
             List<Monster> dungeonMonsters = monsters.Where(monster => monster.dungeonType == dungeonType).ToList();
 
             for(int i=1; i<=3; i++)
             {
+                Console.SetCursorPosition(1, GameManager.MapHeight + 1);
                 Console.WriteLine($"=== {i}번째 전투 시작 ===");
                 Monster monster = ChooseRandomMonster(dungeonMonsters);
                 Battle(player, monster);
                 Console.WriteLine($"=== {i}번째 전투 종료 ===");
+                Utility.ClearConsoleArea(0, GameManager.MapHeight + 1, 60, 30);
             }
         }
 
@@ -73,29 +77,40 @@ namespace Sameple
 
         private void Battle(Player player, Monster monster)
         {
+            int AttackLog = 1;
             bool playerFirst = player.Spd >= monster.Spd;
 
             while(!player.isDead() && !monster.isDead())
             {
                 if (playerFirst)
                 {
+                    Console.SetCursorPosition(1, GameManager.MapHeight + 1 + AttackLog);
                     player.Attack(monster);
+                    AttackLog++;
 
                     if(!monster.isDead())
                     {
+                        Console.SetCursorPosition(1, GameManager.MapHeight + 1 + AttackLog);
                         monster.Attack(monster);
+                        AttackLog++;
                     }
                 }
                 else
                 {
+                    Console.SetCursorPosition(1, GameManager.MapHeight + 1 + AttackLog);
                     monster.Attack(player);
+                    AttackLog++;
 
-                    if(!player.isDead())
+                    if (!player.isDead())
                     {
+                        Console.SetCursorPosition(1, GameManager.MapHeight + 1 + AttackLog);
                         player.Attack(monster);
+                        AttackLog++;
                     }
                 }
             }
+
+            int LastLog = AttackLog;
 
             if (player.isDead())
             {
@@ -113,7 +128,7 @@ namespace Sameple
                 int minGoldGained = (int)(baseGoldGained * goldMultiplier);
                 int maxgoldGained = minGoldGained + random.Next(10, 31);
 
-                player.Victory(expGained, minGoldGained, maxgoldGained);
+                player.Victory(expGained, minGoldGained, maxgoldGained, LastLog);
             }
         }
 

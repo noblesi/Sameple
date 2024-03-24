@@ -18,7 +18,8 @@ namespace Sameple
         static int playerY;
 
         public static Player currentPlayer;
-        
+        public static Shop shop;
+        public static List<Item> items;
 
         private static GameManager instance;
 
@@ -52,6 +53,8 @@ namespace Sameple
             Utility.WriteCenterPosition($"당신의 이름은 {playerName}이군요");
 
             CreatePlayer(playerName);
+
+            CreateShop(items);
 
             StartGame();
         }
@@ -108,7 +111,15 @@ namespace Sameple
             return currentPlayer;
         }
 
-        static void DisplayPlayerInfo()
+        private static Shop CreateShop(List<Item> items)
+        {
+            shop = new Shop(items);
+            Shop.InitializeShop();
+
+            return shop;
+        }
+
+        public static void DisplayPlayerInfo()
         {
             // 플레이어 정보 표시
             Console.SetCursorPosition(MapWidth * 2 + 1, 0);
@@ -126,6 +137,7 @@ namespace Sameple
             Console.SetCursorPosition(MapWidth * 2 + 1, 6);
             Console.WriteLine($"SPD : {currentPlayer.Spd}");
             Console.SetCursorPosition(MapWidth * 2 + 1, 7);
+            Console.WriteLine($"GOLD : {currentPlayer.Gold}");
         }
     }
 }

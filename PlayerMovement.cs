@@ -26,22 +26,21 @@ namespace Sameple
                     MovePlayer(ref playerX, ref playerY, 1, 0, mapWidth, mapHeight);
                     break;
                 case ConsoleKey.D1:
-                    Console.SetCursorPosition(mapWidth * 2 + 1, 7);
+                    Console.SetCursorPosition(mapWidth * 2 + 1, 8);
                     Inventory.OpenInventory(GameManager.currentPlayer.Inventory);
-                    Thread.Sleep(5000);
-                    //Console.ReadLine();
+
                     break;
                 case ConsoleKey.D2:
-                    Console.SetCursorPosition(mapWidth * 2 + 1, 7);
-                    Console.WriteLine("상점");
-                    Thread.Sleep(5000);
-                    //Console.ReadLine();
+                    Console.SetCursorPosition(mapWidth * 2 + 1, 8);
+                    Shop.OpenShopForBuy(GameManager.shop);
                     break;
                 case ConsoleKey.D3:
+                    Console.SetCursorPosition(mapWidth * 2 + 1, 8);
+                    Inventory.OpenInventoryForSell(GameManager.currentPlayer.Inventory);
+                    break;
+                case ConsoleKey.D4:
                     Console.SetCursorPosition(mapWidth * 2 + 1, 7);
-                    Console.WriteLine("강화");
-                    Thread.Sleep(5000);
-                    //Console.ReadLine();
+                    Inventory.EquipWeaponFromInventory(GameManager.currentPlayer.Inventory);
                     break;
 
                 

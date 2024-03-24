@@ -25,8 +25,6 @@
                 {
                     Console.ForegroundColor = defaultColor;
                 }
-
-                //Console.WriteLine($"[{i + 1}] {menuItems[i]}");
                 Utility.WriteCenterPosition($"[{i + 1}] {menuItems[i]}");
                 Console.WriteLine("\n");
             }
